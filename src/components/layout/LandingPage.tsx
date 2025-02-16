@@ -13,7 +13,7 @@ export function LandingPage() {
       setShow(false);
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);git 
 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
