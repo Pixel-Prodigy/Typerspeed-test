@@ -9,16 +9,13 @@ export function LandingPage() {
     setBgBlur("blur-none shadow-2xl");
   }, []);
   useEffect(() => {
-   setTimeout(() => {
-      const handleKeyDown = () => {
-        setShow(false);
-      };
+    const handleKeyDown = () => {
+      setShow(false);
+    };
 
-      window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }, 1000);
-
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   const text = "Press Any Key to Start";
@@ -31,14 +28,19 @@ export function LandingPage() {
             className="z-15 backdrop-blur-2xl bg-black/40 fixed w-screen h-screen"
             onClick={() => setShow(false)}
           ></div>
-          <div className="z-40 text-white absolute top-[40%] left-1/2 -translate-x-1/2 text-7xl font-bold opacity-50 flex gap-2">
+          import {motion} from "framer-motion";
+          <div className="z-40 text-white absolute top-[40%] left-1/2 -translate-x-1/2 text-6xl font-bold opacity-50 flex gap-2">
             {text.split("").map((char, index) => (
               <motion.span
                 key={index}
-                initial={{ opacity: 0, stroke: "#ffffff", strokeWidth: 1 }}
-                animate={{ opacity: 1, strokeWidth: 0 }}
+                initial={{
+                  opacity: 0,
+                  borderBottomWidth: 10,
+                  borderColor: "white",
+                }}
+                animate={{ opacity: 1, borderBottomWidth: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="text-white"
+                className="text-white border-b-2 border-white"
               >
                 {char}
               </motion.span>

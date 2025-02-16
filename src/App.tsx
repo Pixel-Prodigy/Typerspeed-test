@@ -6,7 +6,7 @@ import { ContextProvider } from "./components/ui/context/ContextProvider";
 function App() {
   return (
     <ContextProvider>
-      <div className="mx-auto flex">
+      <div className="mx-auto  flex">
         <LandingPage />
         <FrontPage />
       </div>

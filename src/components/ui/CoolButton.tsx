@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Context } from "./context/Context";
+import { KeyListener } from "./KeyListener";
 
 export function CoolButton() {
   const ctx = useContext(Context);
@@ -8,22 +9,24 @@ export function CoolButton() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter") setGen(!gen);
+      if (event.key === " ") {
+        event.preventDefault();
+      } else if (event.key === "Enter") {
+        setGen((prevGen) => !prevGen);
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [gen]);
+  }, [setGen]);
 
   return (
     <div className="relative">
-      <p
-        className="absolute text-white bottom-1 right-40 whitespace-nowrap"
-      >
+      <p className="absolute text-white bottom-1 right-40 whitespace-nowrap">
         Press Enter to..
       </p>
       <button
-        onClick={() => setGen((prevGen: boolean) => !prevGen)}
+        onClick={() => setGen((prevGen) => !prevGen)}
         className={`relative cursor-pointer font-bold text-white w-36 h-10 group rounded-md transition-all duration-300 overflow-hidden 
           ${gen ? "bg-purple-800" : "bg-[#a326c0dc]"}`}
       >
@@ -43,18 +46,19 @@ export function CoolButton() {
         ></div>
 
         <span
-          className={`absolute top-1/2 right-[42%] -translate-1/2   text-[#ffffffdc] transition-all duration-900 
+          className={`absolute top-1/2 right-[42%] -translate-1/2 text-[#ffffffdc] transition-all duration-900 
           ${gen ? "scale-100" : "scale-0"}`}
         >
           Stop
         </span>
         <span
-          className={`absolute left-[66%] -translate-1/2  top-1/2  text-[#ffffffdc] transition-all duration-900 
+          className={`absolute left-[66%] -translate-1/2 top-1/2 text-[#ffffffdc] transition-all duration-900 
           ${gen ? "scale-100" : "scale-0"}`}
         >
           Typing
         </span>
       </button>
+      {gen && <KeyListener />}
     </div>
   );
 }
